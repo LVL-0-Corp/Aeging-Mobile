@@ -16,11 +16,21 @@ import {
   StatusBar,
 } from 'react-native';
 
+import ShopTile from './UI/Components/ShopTile';
+
+import {getShops} from './API/shopLink';
+
 import { 
   Header
  } from 'react-native-elements';
 
 const App: () => React$Node = () => {
+
+  const TABSHOPS = getShops();
+  const TABTILES = TABSHOPS.map((shop)=>{
+    return (<ShopTile shopName={shop.shopName} shopShortDescription={shop.shopShortDescription} shopImageUrl={shop.shopImageUrl}/>)
+  });
+
   return (
     <Fragment>
       <StatusBar barStyle="dark-content" />
@@ -31,22 +41,15 @@ const App: () => React$Node = () => {
           rightComponent={{ icon: 'home', color: '#fff' }}
         />
         <ScrollView contentInsetAdjustmentBehavior="automatic">
-          <View style={{flex: 1,
+          <View style={{
+            flex: 1,
             flexDirection: 'row',
-            justifyContent: 'space-between',}}>
-            <View style={{flex: 2,
-              height: 400,
-              flexDirection: 'column',
-              justifyContent: 'space-between',}}>
-              <Text>test</Text>
-              <Text>test2</Text>
-            </View>
-            <View style={{flex: 2,
-              flexDirection: 'column',
-              justifyContent: 'space-between',}}>
-              <Text>test</Text>
-            </View>
+            flexWrap: 'wrap',
+            justifyContent: 'space-around',
+          }}>
+            {TABTILES}
           </View>
+          <Text>eoijdzoindzoin</Text>
         </ScrollView>
       </SafeAreaView>
     </Fragment>
