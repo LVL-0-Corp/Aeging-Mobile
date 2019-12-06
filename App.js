@@ -52,8 +52,6 @@ const App: () => React$Node = () => {
           <Text>eoijdzoindzoin</Text>
         </ScrollView>
       </SafeAreaView>
-
-      
     </Fragment>
   );
 };
