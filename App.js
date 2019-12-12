@@ -36,11 +36,14 @@ const App: () => React$Node = () => {
       <StatusBar barStyle="dark-content" />
       <SafeAreaView>
         <Header
-          leftComponent={{ icon: 'menu', color: '#fff' }}
+          leftComponent={{ icon: 'menu', color: '#fff', onPress: () => alert('Menu burger') }}
           centerComponent={{ text: 'Aeging Mobile', style: { color: '#fff' } }}
-          rightComponent={{ icon: 'home', color: '#fff' }}
+          rightComponent={{ icon: 'home', color: '#fff', onPress: () => alert('Home ou back') }}
         />
-        <ScrollView contentInsetAdjustmentBehavior="automatic">
+        <ScrollView 
+          showsVerticalScrollIndicator={false}
+          automaticallyAdjustContentInsets={true}
+          >
           <View style={{
             flex: 1,
             flexDirection: 'row',

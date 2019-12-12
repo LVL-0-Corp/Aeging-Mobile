@@ -11,6 +11,7 @@ const ShopTile = (props) => {
 
     return (
         <Tile
+            onPress={() => alert(shopName+'\n'+shopShortDescription)}
             containerStyle={{
                 marginVertical: 10,
                 borderWidth:1,
@@ -46,5 +47,6 @@ ShopTile.propTypes = {
     shopShortDescription: PropTypes.string.isRequired,
     shopImageUrl: PropTypes.string.isRequired,
 }
+
 
 export default ShopTile;
