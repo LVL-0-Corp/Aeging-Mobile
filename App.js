@@ -6,57 +6,47 @@
  * @flow
  */
 
-import React, {Fragment} from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-} from 'react-native';
+import React from 'react';
+import { createAppContainer } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
+import HomeView from './UI/View/HomeView';
+import TilesShopView from './UI/View/TilesShopView';
+import ShopView from './UI/View/ShopView';
 
-import ShopTile from './UI/Components/ShopTile';
 
-import {getShops} from './API/shopLink';
-
-import { 
-  Header
- } from 'react-native-elements';
+const NavigationApp = createStackNavigator({
+  Home: HomeView,
+  TilesShop: TilesShopView,
+  Shop: ShopView,
+  },{
+    initialRouteName: 'Home',
+  }
+);
 
 const App: () => React$Node = () => {
-
-  const TABSHOPS = getShops();
-  const TABTILES = TABSHOPS.map((shop)=>{
-    return (<ShopTile shopName={shop.shopName} shopShortDescription={shop.shopShortDescription} shopImageUrl={shop.shopImageUrl}/>)
-  });
-
-  return (
-    <Fragment>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <Header
-          leftComponent={{ icon: 'menu', color: '#fff', onPress: () => alert('Menu burger') }}
-          centerComponent={{ text: 'Aeging Mobile', style: { color: '#fff' } }}
-          rightComponent={{ icon: 'home', color: '#fff', onPress: () => alert('Home ou back') }}
-        />
-        <ScrollView 
-          showsVerticalScrollIndicator={false}
-          automaticallyAdjustContentInsets={true}
-          >
-          <View style={{
-            flex: 1,
-            flexDirection: 'row',
-            flexWrap: 'wrap',
-            justifyContent: 'space-around',
-          }}>
-            {TABTILES}
-          </View>
-          <Text>eoijdzoindzoin</Text>
-        </ScrollView>
-      </SafeAreaView>
-    </Fragment>
-  );
+  return (<NavigationApp/>);
 };
 
-export default App;
+/*
+const Stack = createStackNavigator();
+
+function MyStack() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Home" component={HomeView} />
+      <Stack.Screen name="TilesShop" component={TilesShopView} />
+      <Stack.Screen name="Shop" component={ShopView} />
+    </Stack.Navigator>
+  );
+}
+
+const App: () => React$Node = () => {
+  return (
+    <NavigationContainer>
+      <MyStack />
+    </NavigationContainer>
+  );
+}
+export default App();*/
+
+export default createAppContainer(NavigationApp);

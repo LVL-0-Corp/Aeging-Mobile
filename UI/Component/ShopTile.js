@@ -4,14 +4,14 @@ import { Tile } from 'react-native-elements';
 import PropTypes from 'prop-types';
 
 const ShopTile = (props) => {
-    const { shopName, shopShortDescription, shopImageUrl } = props;
+    const { shopName, shopShortDescription, shopImageUrl, infosRouting } = props;
     var {height: heightWindow, width: widthWindow} = Dimensions.get('window');
     let tileWidth = Math.floor((widthWindow-50)/2);
     let tileHeight = Math.floor((heightWindow)/4);
 
     return (
         <Tile
-            onPress={() => alert(shopName+'\n'+shopShortDescription)}
+            onPress = {infosRouting}
             containerStyle={{
                 marginVertical: 10,
                 borderWidth:1,
