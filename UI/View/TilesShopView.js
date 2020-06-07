@@ -9,22 +9,47 @@ import ShopTile from "../Component/ShopTile";
 import { getShops } from "../../API/shopLink";
 
 class TilesShopView extends React.Component {
-    render(){
-        const TABSHOPS = getShops();
-        const TABTILES = TABSHOPS.map((shop)=>{
-            return (
-                <ShopTile   
-                    shopName={shop.shopName} 
-                    shopShortDescription={shop.shopShortDescription} 
-                    shopImageUrl={shop.shopImageUrl}
-                    infosRouting={ () => this.props.navigation.navigate('Shop',{
-                                                                                    shopName: shop.shopName,
-                                                                                    shopShortDescription: shop.shopShortDescription,
-                                                                                    shopImageUrl: shop.shopImageUrl,
-                                                                                }) }
-                />
-            );
+
+    constructor (props) {
+        super(props);
+        this.state = { currentShopsList: [] };
+    }
+
+    async updateShops() {
+        this.setState({
+            currentShopsList: await getShops()
         });
+    }
+    
+    componentDidMount() {
+       this.updateShops();
+    }
+
+    render() {       
+        const TABSHOPS = this.state.currentShopsList;        
+        let TABTILES = null;
+        if(TABSHOPS.length > 0){
+            TABTILES = TABSHOPS.map((shop)=>{
+                return (
+                    <ShopTile  
+                        key={shop._id} 
+                        shopName={shop.name} 
+                        shopShortDescription={shop.shortDescription} 
+                        shopImageUrl={shop.imageUrl}
+                        infosRouting={ 
+                            () => this.props.navigation
+                                                    .navigate('Shop',{
+                                                        shopName: shop.name,
+                                                        shopShortDescription: shop.shortDescription,
+                                                        shopImagesUrl: shop.imagesUrl,
+                                                        shopLongDescription: shop.longDescription,
+                                                        shopAddress: shop.address,
+                                                    })
+                        }
+                    />
+                );
+            });
+        }
         return (
             <Fragment>
                 <StatusBar barStyle="dark-content" />
@@ -33,7 +58,6 @@ class TilesShopView extends React.Component {
                         showsVerticalScrollIndicator={false}
                         automaticallyAdjustContentInsets={true}
                     >
-                        {/*<AppHeader/>*/}
                         <View style={{
                             flex: 1,
                             flexDirection: 'row',

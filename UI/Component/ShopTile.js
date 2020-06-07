@@ -48,5 +48,4 @@ ShopTile.propTypes = {
     shopImageUrl: PropTypes.string.isRequired,
 }
 
-
 export default ShopTile;
