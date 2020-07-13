@@ -1,0 +1,84 @@
+import React, {Fragment} from 'react';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import Icon from 'react-native-vector-icons/Feather';
+import HomeView from './UI/View/HomeView';
+import TilesShopView from './UI/View/TilesShopView';
+import ShopView from './UI/View/ShopView';
+
+const Stack = createStackNavigator();
+const Drawer = createDrawerNavigator();
+
+function Home({navigation},props) {
+  return(
+    <Stack.Navigator initialRouteName="Home">
+      <Stack.Screen name="Home" component={HomeView} 
+        options={{
+          title:'Bienvenu',
+          headerTitleAlign: 'center',
+          headerTintColor: '#000',
+          headerLeft: () => (
+            <Icon.Button name="menu" size={25}
+            backgroundColor="#FF00FF" onPress={() => navigation.openDrawer()}></Icon.Button>
+          )
+        }}
+      />
+      <Stack.Screen name="TilesShop" component={TilesShopView} 
+        
+      />
+      <Stack.Screen name="Shop" component={ShopView} 
+        
+      />
+    </Stack.Navigator>
+  )
+}
+
+function Tile({navigation},props) {
+  return(
+    <Stack.Navigator initialRouteName="TileShop">
+      <Stack.Screen name="TileShop" component={TilesShopView} 
+        options={{
+          title:'TileShop',
+          headerLeft: () => (
+            <Icon.Button name="menu" size={25}
+            backgroundColor="#FF00FF" onPress={() => navigation.openDrawer()}></Icon.Button>
+          )
+        }}
+      />
+    </Stack.Navigator>
+  )
+}
+/*
+function Tile(props) {
+  console.log("hey",props.route,"hey");
+  return(
+    <Stack.Navigator initialRouteName="TilesShop">
+      <Stack.Screen name="Home" component={HomeView} />
+      <Stack.Screen name="TilesShop" component={TilesShopView} />
+      <Stack.Screen name="Shop" component={ShopView} />
+    </Stack.Navigator>
+  )
+}
+
+function HomeV2() {
+  return(
+    <BottomTab.Navigator initialRouteName="TilesShop">
+      <BottomTab.Screen name="Tout" component={TilesShopView} />
+      <BottomTab.Screen name="Shop" component={ShopView} />
+    </BottomTab.Navigator>
+  )
+}
+*/
+export default function App() {
+  return (
+    <Fragment>
+      <NavigationContainer>
+        <Drawer.Navigator initialRouteName="Home">
+          <Drawer.Screen name="Home" component={Home}/>
+          <Stack.Screen name="Profil" component={Tile} />
+        </Drawer.Navigator>
+      </NavigationContainer>
+    </Fragment>
+  );
+}

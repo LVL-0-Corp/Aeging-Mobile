@@ -1,0 +1,168 @@
+import React, {Fragment} from 'react';
+import { createDrawerNavigator, DrawerContent } from '@react-navigation/drawer';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+import Icon from 'react-native-vector-icons/Feather';
+
+import HomeView from './UI/View/HomeView';
+import TilesShopView from './UI/View/TilesShopView';
+import DrawerView from './UI/View/DrawerView';
+import ShopView from './UI/View/ShopView';
+import SignInView from './UI/View/SignInView';
+import SignUpView from './UI/View/SignUpView';
+import ProfilView from './UI/View/ProfilView';
+import CertificationView from './UI/View/CetificationView';
+
+const HomeStack = createStackNavigator();
+const TileStack = createStackNavigator();
+const SignInStack = createStackNavigator();
+const SignUpStack = createStackNavigator();
+const ProfilStack = createStackNavigator();
+const CertificationStack = createStackNavigator();
+const Tab = createBottomTabNavigator();
+const Drawer = createDrawerNavigator();
+
+function HomeStackScreen({navigation},props) {
+  return(
+    <HomeStack.Navigator initialRouteName="Home">
+      <HomeStack.Screen name="Home" component={HomeView} 
+        options={{
+          title:'Bienvenue',
+          headerTitleAlign: 'center',
+          headerTintColor: '#000',
+          headerLeft: () => (
+            <Icon.Button name="menu" size={25}
+            color="black" backgroundColor="white" onPress={() => navigation.openDrawer()}></Icon.Button>
+          )
+        }}
+      />
+    </HomeStack.Navigator>
+  )
+}
+
+function TileStackScreen({navigation},props) {
+  return(
+    <TileStack.Navigator initialRouteName="TilesShop">
+      <TileStack.Screen name="TilesShop" component={TilesShopView} 
+        options={{
+          headerTitleAlign: 'center',
+          title:'TileShop',
+          headerLeft: () => (
+            <Icon.Button name="menu" size={25}
+            color="black" backgroundColor="white" onPress={() => navigation.openDrawer()}></Icon.Button>
+          )
+        }}
+      />
+      <TileStack.Screen name="Shop" component={ShopView} />
+    </TileStack.Navigator>
+  )
+}
+
+function SignInStackScreen({navigation},props) {
+  return(
+    <SignInStack.Navigator initialRouteName="SignIn">
+      <SignInStack.Screen name="SignIn" component={SignInView} 
+        options={{
+          headerTitleAlign: 'center',
+          title:'SignIn',
+          headerLeft: () => (
+            <Icon.Button name="menu" size={25}
+            color="black" backgroundColor="white" onPress={() => navigation.openDrawer()}></Icon.Button>
+          )
+        }}
+      />
+    </SignInStack.Navigator>
+  )
+}
+
+function SignUpStackScreen({navigation},props) {
+  return(
+    <SignUpStack.Navigator initialRouteName="SignUp">
+      <SignUpStack.Screen name="SignUp" component={SignUpView} 
+        options={{
+          headerTitleAlign: 'center',
+          title:'SignUp',
+          headerLeft: () => (
+            <Icon.Button name="menu" size={25}
+            color="black" backgroundColor="white" onPress={() => navigation.openDrawer()}></Icon.Button>
+          )
+        }}
+      />
+    </SignUpStack.Navigator>
+  )
+}
+
+function ProfilStackScreen({navigation},props) {
+  return(
+    <ProfilStack.Navigator initialRouteName="Profil">
+      <ProfilStack.Screen name="Profil" component={ProfilView} 
+        options={{
+          headerTitleAlign: 'center',
+          title:'Profil',
+          headerLeft: () => (
+            <Icon.Button name="menu" size={25}
+            color="black" backgroundColor="white" onPress={() => navigation.openDrawer()}></Icon.Button>
+          )
+        }}
+      />
+    </ProfilStack.Navigator>
+  )
+}
+
+function CertificationStackScreen({navigation},props) {
+  return(
+    <CertificationStack.Navigator initialRouteName="Certification">
+      <CertificationStack.Screen name="Certification" component={CertificationView} 
+        options={{
+          headerTitleAlign: 'center',
+          title:'Certification',
+          headerLeft: () => (
+            <Icon.Button name="menu" size={25}
+            color="black" backgroundColor="white" onPress={() => navigation.openDrawer()}></Icon.Button>
+          )
+        }}
+      />
+    </CertificationStack.Navigator>
+  )
+}
+
+function GeneralTab() {
+  return (
+    <Tab.Navigator>
+      <Tab.Screen name="Tout" component={TileStackScreen} />
+      <Tab.Screen name="Bio" component={TileStackScreen} />
+      <Tab.Screen name="Local" component={TileStackScreen} />
+    </Tab.Navigator>
+  );
+}
+
+
+function LoginTab() {
+  return (
+    <Tab.Navigator>
+      <Tab.Screen name="Sign in" component={SignInStackScreen} />
+      <Tab.Screen name="Sign up" component={SignUpStackScreen} />
+    </Tab.Navigator>
+  );
+}
+
+
+export default function App() {
+  return (
+    <Fragment>
+      <NavigationContainer>
+        <Drawer.Navigator 
+          drawerContent={props => <DrawerView {...props}/>}
+          initialRouteName="Home"
+        >
+          <Drawer.Screen name="Home" component={TileStackScreen}/>
+          <Drawer.Screen name="Login" component={LoginTab} />
+          <Drawer.Screen name="Profil" component={ProfilStackScreen} />
+          <Drawer.Screen name="Certification" component={CertificationStackScreen} />
+        </Drawer.Navigator>
+      </NavigationContainer>
+    </Fragment>
+  );
+}

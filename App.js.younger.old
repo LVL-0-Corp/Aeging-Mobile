@@ -1,0 +1,105 @@
+import React, {Fragment} from 'react';
+import { createDrawerNavigator, DrawerContent } from '@react-navigation/drawer';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import Icon from 'react-native-vector-icons/Feather';
+import HomeView from './UI/View/HomeView';
+import TilesShopView from './UI/View/TilesShopView';
+import { DrawerView } from './UI/View/DrawerView';
+import ShopView from './UI/View/ShopView';
+import ProfilView from './UI/View/ProfilView';
+
+
+const HomeStack = createStackNavigator();
+const TileStack = createStackNavigator();
+const ProfilStack = createStackNavigator();
+const Drawer = createDrawerNavigator();
+
+function HomeStackScreen({navigation},props) {
+  return(
+    <HomeStack.Navigator initialRouteName="Home"
+    >
+      <HomeStack.Screen name="Home" component={HomeView} 
+        options={{
+          title:'Bienvenue',
+          headerTitleAlign: 'center',
+          headerTintColor: '#000',
+          headerLeft: () => (
+            <Icon.Button name="menu" size={25}
+            color="black" backgroundColor="white" onPress={() => navigation.openDrawer()}></Icon.Button>
+          )
+        }}
+      />
+    </HomeStack.Navigator>
+  )
+}
+
+function TileStackScreen({navigation},props) {
+  return(
+    <TileStack.Navigator initialRouteName="TilesShop">
+      <TileStack.Screen name="TilesShop" component={TilesShopView} 
+        options={{
+          headerTitleAlign: 'center',
+          title:'TileShop',
+          headerLeft: () => (
+            <Icon.Button name="menu" size={25}
+            color="black" backgroundColor="white" onPress={() => navigation.openDrawer()}></Icon.Button>
+          )
+        }}
+      />
+      <TileStack.Screen name="Shop" component={ShopView} />
+    </TileStack.Navigator>
+  )
+}
+
+function ProfilStackScreen({navigation},props) {
+  return(
+    <ProfilStack.Navigator initialRouteName="Profil">
+      <ProfilStack.Screen name="Profil" component={ProfilView} 
+        options={{
+          headerTitleAlign: 'center',
+          title:'Profil',
+          headerLeft: () => (
+            <Icon.Button name="menu" size={25}
+            color="black" backgroundColor="white" onPress={() => navigation.openDrawer()}></Icon.Button>
+          )
+        }}
+      />
+    </ProfilStack.Navigator>
+  )
+}
+
+/*
+function Tile(props) {
+  console.log("hey",props.route,"hey");
+  return(
+    <Stack.Navigator initialRouteName="TilesShop">
+      <Stack.Screen name="Home" component={HomeView} />
+      <Stack.Screen name="TilesShop" component={TilesShopView} />
+      <Stack.Screen name="Shop" component={ShopView} />
+    </Stack.Navigator>
+  )
+}
+
+function HomeV2() {
+  return(
+    <BottomTab.Navigator initialRouteName="TilesShop">
+      <BottomTab.Screen name="Tout" component={TilesShopView} />
+      <BottomTab.Screen name="Shop" component={ShopView} />
+    </BottomTab.Navigator>
+  )
+}
+*/
+export default function App() {
+  return (
+    <Fragment>
+      <NavigationContainer>
+        <Drawer.Navigator initialRouteName="Home">
+          <Drawer.Screen name="Home" component={HomeStackScreen}/>
+          <Drawer.Screen name="TilesShop" component={TileStackScreen} />
+          <Drawer.Screen name="Profil" component={ProfilStackScreen} />
+        </Drawer.Navigator>
+      </NavigationContainer>
+    </Fragment>
+  );
+}

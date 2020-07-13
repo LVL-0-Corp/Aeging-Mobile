@@ -14,23 +14,28 @@ const ShopTile = (props) => {
             onPress = {infosRouting}
             containerStyle={{
                 marginVertical: 10,
-                borderWidth:1,
                 borderStyle: "solid",
-                borderRadius: 5,
+                shadowColor: "#000",
+                shadowOffset: {
+                    width: 20,
+                    height: 16,
+                },
+                shadowOpacity: 50,
+                shadowRadius: 50,
+                elevation: 8,
+                borderRadius: 10,
                 backgroundColor: '#fff',
             }}
             width= {tileWidth}
             height= {tileHeight}
             imageSrc={{ uri: shopImageUrl, }}
             imageProps={{
-                resizeMode: "contain",
+                resizeMode: "cover",
+                borderTopLeftRadius: 10,
+                borderTopRightRadius: 10,
             }}
             imageContainerStyle={{
-                marginHorizontal: 5,
-                marginTop: 10,
-                borderStyle: "solid",
-                borderWidth: 1,
-                backgroundColor: '#eee',
+                
             }}
             title={shopName} 
             titleStyle={{

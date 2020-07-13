@@ -7,39 +7,37 @@ import {
     Button
 } from "react-native";
 
-class HomeView extends React.Component {
-    render(){
-        return (
-            <Fragment>
-                <StatusBar barStyle="dark-content" />
-                <SafeAreaView>
-                    <ScrollView 
-                        showsVerticalScrollIndicator={false}
-                        automaticallyAdjustContentInsets={true}
-                    >
-                        <View>
-                            <Button
-                                title="Bio"
-                                onPress={() => this.props.navigation.navigate('TilesShop')}
-                            />
-                        </View>
-                        <View>
-                            <Button
-                                title="Local"
-                                onPress={() => this.props.navigation.navigate('TilesShop')}
-                            />
-                        </View>
-                        <View>
-                            <Button
-                                title="Tout"
-                                onPress={() => this.props.navigation.navigate('TilesShop')}
-                            />
-                        </View>
-                    </ScrollView>
-                </SafeAreaView>
-            </Fragment>
-        );
-    }
+function HomeView({ navigation }) {
+    return (
+        <Fragment>
+            <StatusBar barStyle="dark-content" />
+            <SafeAreaView>
+                <ScrollView
+                    showsVerticalScrollIndicator={false}
+                    automaticallyAdjustContentInsets={true}
+                >
+                    <View>
+                        <Button
+                            title="Bio"
+                            onPress={() => navigation.navigate('TilesShop')}
+                        />
+                    </View>
+                    <View>
+                        <Button
+                            title="Local"
+                            onPress={() => navigation.navigate('TilesShop')}
+                        />
+                    </View>
+                    <View>
+                        <Button
+                            title="Tout"
+                            onPress={() => navigation.navigate('TilesShop')}
+                        />
+                    </View>
+                </ScrollView>
+            </SafeAreaView>
+        </Fragment>
+    );
 }
 
 export default HomeView;
