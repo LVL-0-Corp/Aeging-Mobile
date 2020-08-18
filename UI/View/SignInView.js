@@ -59,22 +59,28 @@ function ProfilView({ navigation, route }) {
                     showsVerticalScrollIndicator={false}
                     automaticallyAdjustContentInsets={true}
                 >
-                    <View style={styles.container}>
-                        <Text style={styles.text_footer}>
-                            Pseudo
-                        </Text>
-                        <View style={styles.action}>
-                            <Icon
+
+                        <View style={styles.container}>
+                            <Text style={{flex:1, paddingTop: 20, color:'#35D19E', fontSize: 20, fontFamily: 'futura-medium-bt', textAlign:'center', paddingBottom: 150}}>
+                                Se connecter
+                            </Text>
+                        </View>
+                        <View style={styles.container}>
+                            {/* <Icon
                                 name="user"
                                 color="#05375a"
                                 size={25}
-                            />
+                            /> */}
                             <TextInput
-                                placeholder="Pseudo"
+                                placeholder="contact@localgo.com"
+                                placeholderTextColor="#35D19E"
                                 style={styles.textInput}
                                 autoCapitalize="none"
                                 onChangeText={(value) => textInputChange(value)}
                             />
+                            <Text style={styles.text}>
+                                Adresse mail
+                            </Text>
                             {data.check_textInputChange ? 
                             <Icon 
                                 name="check-circle"
@@ -82,23 +88,19 @@ function ProfilView({ navigation, route }) {
                                 size={25}
                             /> : null }
                         </View>
-                        <Text style={styles.text_footer_next}  >
-                            Password
-                        </Text>
-                        <View style={styles.action}>
-                            <Icon
-                                name="lock"
-                                color="#05375a"
-                                size={25}
-                            />
+                        <View style={styles.container}>
                             <TextInput
                                 placeholder="Password"
+                                placeholderTextColor="#35D19E"
                                 secureTextEntry={data.secureTextEntry ? true : false}
                                 style={styles.textInput}
                                 autoCapitalize="none"
                                 onChangeText={(value) => handlepasswordChange(value)}
                             />
-                            <TouchableOpacity
+                            <Text style={styles.text}  >
+                                Mot de passe
+                            </Text>
+                            {/* <TouchableOpacity
                                 onPress={updatePasswordSee}
                             >
                                 {data.secureTextEntry ? 
@@ -112,14 +114,12 @@ function ProfilView({ navigation, route }) {
                                     color="grey"
                                     size={25}
                                 /> }
-                            </TouchableOpacity>
+                            </TouchableOpacity> */}
                             
                         </View>
-                        <View style={styles.button}>
+                        <View style={styles.container}>
                             <Text
-                                style={
-                                    [styles.textSign, {backgroundColor: "white"}, {padding: 20}]
-                                }
+                                style={styles.textSign}
                                 onPress= {() => {
                                     console.log(data.pseudo,data.password)
                                 }}
@@ -127,7 +127,6 @@ function ProfilView({ navigation, route }) {
                                 Sign In
                             </Text>
                         </View>
-                    </View>
                 </ScrollView>
             </SafeAreaView>
         </Fragment>
@@ -136,79 +135,44 @@ function ProfilView({ navigation, route }) {
 
 const styles = StyleSheet.create({
     container: {
-      flex: 1
-    },
-    header: {
         flex: 1,
-        justifyContent: 'flex-end',
-        paddingHorizontal: 20,
-        paddingBottom: 50
+        flexDirection: "row",
+        alignItems: "center",
+        position: 'relative',
+        backgroundColor: "#F4FFF9",
     },
-    footer: {
-        flex: 3,
-        backgroundColor: '#fff',
-        borderTopLeftRadius: 30,
-        borderTopRightRadius: 30,
-        paddingHorizontal: 20,
-        paddingVertical: 30
-    },
-    text_header: {
-        color: '#fff',
-        fontWeight: 'bold',
-        fontSize: 30
-    },
-    text_footer: {
-        color: '#05375a',
-        fontSize: 18
-    },
-    text_footer_next: {
-        color: '#05375a',
-        fontSize: 18,
-        marginTop: 35
-    },
-    action: {
-        flexDirection: 'row',
-        marginTop: 10,
-        borderBottomWidth: 1,
-        borderBottomColor: '#f2f2f2',
-        paddingBottom: 5
-    },
-    actionError: {
-        flexDirection: 'row',
-        marginTop: 10,
-        borderBottomWidth: 1,
-        borderBottomColor: '#FF0000',
-        paddingBottom: 5
+    text: {
+        position: 'absolute',
+        right: 25,
+        top: 25,
+        color: '#35D19E',
     },
     textInput: {
         flex: 1,
-        marginTop: Platform.OS === 'ios' ? 0 : -12,
+        marginTop: Platform.OS === 'ios' ? 0 : 10,
         marginLeft: 15,
         marginRight: 15,
-        backgroundColor: 'white',
+        paddingLeft: 10,
+        backgroundColor: '#F4FFF9',
+        color: '#2CBF91',
         borderWidth: 1,
-        padding: 0 ,
-        borderColor: 'black'
-    },
-    errorMsg: {
-        color: '#FF0000',
-        fontSize: 14,
-    },
-    button: {
-        alignItems: 'center',
-        marginTop: 50
-    },
-    signIn: {
-        width: '100%',
-        height: 50,
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderRadius: 10
+        borderColor: '#94FBAF',
+        borderRadius: 7,
     },
     textSign: {
+        flex:1,
+        marginTop: 200,
+        marginLeft: 15,
+        marginRight: 15,
+        marginBottom: 35,
+        paddingBottom: 15,
+        paddingTop: 15,
+        textAlign: 'center',
         fontSize: 18,
-        fontWeight: 'bold'
-    }
-  });
+        fontWeight: 'bold',
+        backgroundColor: '#37D2A0',
+        color: 'white',
+    },
+});
   
 export default ProfilView;

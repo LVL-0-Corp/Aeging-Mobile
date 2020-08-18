@@ -4,20 +4,21 @@ import {
     SafeAreaView,
     ScrollView,
     StatusBar,
-    Button,
     Dimensions,
-    Image
+    Image,
+    Text
 } from "react-native";
+import { Button } from 'react-native-elements';
 
 function OnBoarding({ navigation }) {
 
     const { width } = Dimensions.get("window");
-    const height = width * 1;
+    const height = width * 0.8;
     return (
         <Fragment>
             <StatusBar barStyle="dark-content" />
             <SafeAreaView>
-                <View style={{ width, height }}>
+                <View style={{ width, height, marginBottom: 20, marginTop: 60 }}>
                     <ScrollView
                         pagingEnabled
                         horizontal
@@ -25,18 +26,18 @@ function OnBoarding({ navigation }) {
                     >
                         <Image
                             key={0}
-                            source={{ uri: 'https://s2.qwant.com/thumbr/0x380/f/3/7fd3364e35a68d4d7431af51141039b9d216b85bb6d6d9097934cb6c86a3ed/202770.svg.jpg?u=https%3A%2F%2Fimage.flaticon.com%2Ficons%2Fsvg%2F202%2F202770.svg&q=0&b=1&p=0&a=1' }}
-                            style={{ width, height, resizeMode: 'cover' }}
+                            source={require('../../assets/Onboarding1.png')}
+                            style={{ width, height, resizeMode: 'contain' }}
                         />
                         <Image
                             key={1}
-                            source={{ uri: 'https://s2.qwant.com/thumbr/0x380/f/3/7fd3364e35a68d4d7431af51141039b9d216b85bb6d6d9097934cb6c86a3ed/202770.svg.jpg?u=https%3A%2F%2Fimage.flaticon.com%2Ficons%2Fsvg%2F202%2F202770.svg&q=0&b=1&p=0&a=1' }}
-                            style={{ width, height, resizeMode: 'cover' }}
+                            source={require('../../assets/Onboarding2.png')}
+                            style={{ width, height, resizeMode: 'contain' }}
                         />
                         <Image
                             key={2}
-                            source={{ uri: 'https://s2.qwant.com/thumbr/0x380/f/3/7fd3364e35a68d4d7431af51141039b9d216b85bb6d6d9097934cb6c86a3ed/202770.svg.jpg?u=https%3A%2F%2Fimage.flaticon.com%2Ficons%2Fsvg%2F202%2F202770.svg&q=0&b=1&p=0&a=1' }}
-                            style={{ width, height, resizeMode: 'cover' }}
+                            source={require('../../assets/Onboarding3.png')}
+                            style={{ width, height, resizeMode: 'contain' }}
                         />
                     </ScrollView>
                 </View>
@@ -44,23 +45,40 @@ function OnBoarding({ navigation }) {
                     showsVerticalScrollIndicator={false}
                     automaticallyAdjustContentInsets={true}
                 >
-                    <View>
-                        <Button
-                            title="connexion"
+                    <View style={{ marginRight: 20, marginLeft: 20, display:"flex", flexDirection:"row", justifyContent:"space-between", marginBottom: 10}}>
+                        <Text 
+                            style={{ color: "#FFFFFF", backgroundColor: "#37D2A0", paddingTop: 15, paddingBottom: 15, paddingLeft: 20, paddingRight: 20, borderWidth: 1, textAlign: "center", borderColor: "#37D2A0", borderRadius: 7, flex: 1, marginRight: 5 }}
+                            onPress={() => navigation.navigate('SignUp')} >
+                            Créer un compte
+                        </Text>
+                        {/* <Button
+                            title="Se connecter"
                             onPress={() => navigation.navigate('SignIn')}
-                        />
-                    </View>
-                    <View>
-                        <Button
-                            title="inscription"
+                        /> */}
+                        <Text 
+                            style={{ color: "#FFFFFF", backgroundColor: "#37D2A0", paddingTop: 15, paddingBottom: 15, paddingLeft: 20, paddingRight: 20, borderWidth: 1, textAlign: "center", borderColor: "#37D2A0", borderRadius: 7, flex:1, marginLeft: 5 }}
+                            onPress={() => navigation.navigate('SignIn')} >
+                            Se connecter
+                        </Text>
+                        {/* <Button
+                            title="Créer un compte"
+                            backgroundColor="#37D2A0"
+                            color="#fff"
                             onPress={() => navigation.navigate('SignUp')}
-                        />
+                        /> */}
                     </View>
-                    <View>
-                        <Button
-                            title="Tout"
+                    <View style={{ marginRight: 20, marginLeft: 20 }}>
+                        <Text 
+                            style={{ color:"#37D2A0", paddingTop: 15, paddingBottom: 15, paddingLeft: 20, paddingRight: 20, borderWidth: 1, textAlign: "center", borderColor: "#37D2A0", borderRadius: 7 }}
+                            onPress={() => navigation.navigate('DrawerHome')} >
+                            Voir les commerçants locaux
+                        </Text>
+                        {/* <Button
+                            title="Voir les commerçants locaux"
+                            type='outline'
+                            backgroundColor='yellow'
                             onPress={() => navigation.navigate('DrawerHome')}
-                        />
+                        /> */}
                     </View>
                 </ScrollView>
             </SafeAreaView>

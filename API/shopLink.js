@@ -2,7 +2,7 @@
 // yohann : 192.168.99.1
 // moi : 192.168.1.5
 
-async function getShops2() {
+async function getShops() {
     try {
       let result = await fetch('http://192.168.99.1:3000/api/0.1/shops').then((res) => res.json());
       return result;
@@ -11,7 +11,7 @@ async function getShops2() {
       return [];
     }
 }
-async function getShops() {
+async function getShops2() {
   return [{
     imagesUrl: [
       "https://s2.qwant.com/thumbr/0x0/d/4/b5dbd118f26b7f9b5c5fe891af09c60acbee34ae68b6e6e83f7457befeda36/1200px-Solf%C3%A9rino_ferme_de_pouy_2.JPG?u=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Fthumb%2Fc%2Fce%2FSolf%25C3%25A9rino_ferme_de_pouy_2.JPG%2F1200px-Solf%25C3%25A9rino_ferme_de_pouy_2.JPG&q=0&b=1&p=0&a=1",

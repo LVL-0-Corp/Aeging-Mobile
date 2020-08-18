@@ -4,12 +4,14 @@ import {
     SafeAreaView,
     ScrollView,
     StatusBar,
+    Dimensions,
     Image,
     Linking
 } from "react-native";
 import { View } from 'native-base';
 
 function CertificationView({ navigation, route }) {
+    const { height } = Dimensions.get("window");
     return (
         <Fragment>
             <StatusBar barStyle="dark-content" />
@@ -19,7 +21,7 @@ function CertificationView({ navigation, route }) {
                     automaticallyAdjustContentInsets={true}
                 >
                     <View 
-                    style= {{ flex: 1, flexDirection: 'column', justifyContent: 'space-between', alignItems: 'center'}}>
+                    style= {{ flex: 1, flexDirection: 'column', justifyContent: 'space-between', alignItems: 'center', backgroundColor:'#F4FFF9'}}>
                         <View style={{
                                 flex: 1,
                                 flexDirection: 'row',
