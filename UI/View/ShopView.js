@@ -9,7 +9,7 @@ import {
     View,
     Linking
 } from "react-native";
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Icon from 'react-native-vector-icons/Fontisto';
 import ProductTile from "../Component/ProductTile";
 import { getProduct } from "../../API/productLink";
 
@@ -57,62 +57,64 @@ function ShopView({ navigation, route }) {
                     showsVerticalScrollIndicator={false}
                     automaticallyAdjustContentInsets={true}
                 >
-                    <ScrollView
-                        pagingEnabled
-                        horizontal
-                        style={{ width, height }}
-                    >
-                        {
-                            shopImagesUrl.map((image, index) =>
-                                <Image
-                                    key={index}
-                                    source={{ uri: image }}
-                                    style={{ width, height, resizeMode: 'cover' }}
-                                />
-                            )
-                        }
-                    </ScrollView>
-                    <View style={{ margin:15 }}>
-                        <Text style={{ fontSize: 20, fontFamily: 'Futura', color: '#35D19E' }}>{shopName}</Text>
-                        <Text style={{ color: 'blue', textDecorationLine: 'underline' }} onPress={() => Linking.openURL('http://' + shopWebSite)}>{shopWebSite}</Text>
-                        <Text>{shopAddress}</Text>
-                        <View style={{ display: 'flex', flexDirection: 'row' }}
+                    <View style={{ backgroundColor:"#F4FFF9" }}>
+                        <ScrollView
+                            pagingEnabled
+                            horizontal
+                            style={{ width, height }}
                         >
-                            <Icon
-                                name="email"
-                                size={25}
-                                style={{ paddingRight: 10, paddingLeft: 10, paddingTop: 3, paddingBottom: 3, backgroundColor: 'lightgrey', borderRadius: 8 }}
-                                onPress={() => Linking.openURL('mailto:' + shopMail)}
-                            />
-                            <Icon
-                                name="phone"
-                                size={25}
-                                style={{ marginLeft: 10, paddingRight: 10, paddingLeft: 10, paddingTop: 3, paddingBottom: 3, backgroundColor: 'lightgrey', borderRadius: 8 }}
-                                onPress={
-                                    () => {
-                                        let phone = '';
-                                        if (Platform.OS === 'android') {
-                                            phone = 'tel:' + shopPhone
-                                        } else {
-                                            phone = 'telprompt:' + shopPhone
+                            {
+                                shopImagesUrl.map((image, index) =>
+                                    <Image
+                                        key={index}
+                                        source={{ uri: image }}
+                                        style={{ width, height, resizeMode: 'cover' }}
+                                    />
+                                )
+                            }
+                        </ScrollView>
+                        <View style={{ margin:15}}>
+                            <Text style={{ fontSize: 20, fontFamily: 'futura-medium-bt', color: '#35D19E' }}>{shopName}</Text>
+                            <Text style={{ color: '#37D2A0', textDecorationLine: 'underline' }} onPress={() => Linking.openURL('http://' + shopWebSite)}>{shopWebSite}</Text>
+                            <Text style={{color:'#37D2A0'}}>{shopAddress}</Text>
+                            <View style={{ display: 'flex', flexDirection: 'row' }}
+                            >
+                                <Icon
+                                    name="email"
+                                    size={25}
+                                    style={{ paddingRight: 10, paddingLeft: 10, paddingTop: 3, paddingBottom: 3, backgroundColor: 'lightgrey', borderRadius: 8 }}
+                                    onPress={() => Linking.openURL('mailto:' + shopMail)}
+                                />
+                                <Icon
+                                    name="phone"
+                                    size={25}
+                                    style={{ marginLeft: 10, paddingRight: 10, paddingLeft: 10, paddingTop: 3, paddingBottom: 3, backgroundColor: 'lightgrey', borderRadius: 8 }}
+                                    onPress={
+                                        () => {
+                                            let phone = '';
+                                            if (Platform.OS === 'android') {
+                                                phone = 'tel:' + shopPhone
+                                            } else {
+                                                phone = 'telprompt:' + shopPhone
+                                            }
+                                            Linking.openURL(phone);
                                         }
-                                        Linking.openURL(phone);
                                     }
-                                }
-                            />
-                        </View>
-                        <Text>{shopTimeTable}</Text>
-                        <Text>{shopCertif}</Text>
-                        <Text>{shopProductType}</Text>
-                        <Text>{shopLongDescription}</Text>
-                        <View style={{
-                                flex: 1,
-                                flexDirection: 'row',
-                                flexWrap: 'wrap',
-                                justifyContent: 'space-around',
-                                backgroundColor: '#fbfff9'
-                            }}>
-                            {TABPRODUCT}
+                                />
+                            </View>
+                            <Text>{shopTimeTable}</Text>
+                            <Text>{shopCertif}</Text>
+                            <Text>{shopProductType}</Text>
+                            <Text>{shopLongDescription}</Text>
+                            <View style={{
+                                    flex: 1,
+                                    flexDirection: 'row',
+                                    flexWrap: 'wrap',
+                                    justifyContent: 'space-around',
+                                    backgroundColor: '#fbfff9'
+                                }}>
+                                {TABPRODUCT}
+                            </View>
                         </View>
                     </View>
                 </ScrollView>

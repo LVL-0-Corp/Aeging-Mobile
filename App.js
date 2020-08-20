@@ -5,6 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import {
   Text,
+  TextInput,
   Image,
   SafeAreaView,
   ScrollView,
@@ -29,7 +30,6 @@ import NewsView from './UI/View/NewsView';
 import WhoAreWeView from './UI/View/WhoAreWeView';
 import CertificationView from './UI/View/CetificationView';
 import OnBoarding from './UI/View/OnBoarding';
-import { getVersion } from 'jest';
 
 const OnBoardingStack = createStackNavigator();
 // const HomeStack = createStackNavigator();
@@ -43,6 +43,13 @@ const NewsStack = createStackNavigator();
 const WhoAreWeStack = createStackNavigator();
 // const Tab = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
+
+
+import Geolocation from '@react-native-community/geolocation';
+
+// Geolocation.setRNConfiguration(config);
+navigator.geolocation = require('@react-native-community/geolocation');
+
 
 // function HomeStackScreen({navigation},props) {
 //   return(
@@ -69,23 +76,41 @@ function TileStackScreen({navigation},props) {
         name="TilesShop" 
         component={TilesShopView} 
         options={{
-          headerStyle:{backgroundColor:'#2CBF91',height: 100},
+          headerStyle:{backgroundColor:'#2CBF91',height: 130},
           headerTitleAlign: 'center',
-          title: " ddd",
-          headerLeft: () => (
-            // <View>
-              <Icon.Button 
-                name="menu" 
+          headerTitle: () => (
+            <View style={{ position:"relative" }}>
+              <Icon
+                name="search"
+                color='white'
                 size={25}
-                color="white" 
-                backgroundColor="#2CBF91" 
-                onPress={() => navigation.openDrawer()}>
-              </Icon.Button>
-            //   <View style={{ flexDirection:'row'}}>
-            //     <Text style={{ marginLeft: 10, paddingLeft: 13, paddingRight: 13, backgroundColor: 'white', color: '#3DD58E', borderRadius: 5, paddingBottom:3, paddingTop:3}}>Filtres</Text>
-            //     <Text style={{ marginLeft: 10, paddingLeft: 8, paddingRight: 8, backgroundColor: 'white', color: '#3DD58E', borderRadius: 100, paddingBottom:3, paddingTop:3}}>+</Text>
-            //   </View>
-            // </View>
+                style={{position:'absolute', top:-27, left: 10}}
+              />
+              <TextInput
+                placeholder="Rechercher"
+                placeholderTextColor="white"
+                style={{borderRadius: 5, borderColor: "white", borderWidth: 1, marginTop: -40, width: 200, paddingLeft: 45}}
+                autoCapitalize="none"
+                onChangeText={(value) => textInputChange(value)}
+              />
+            </View>
+          ),
+          headerLeft: () => (
+            <View>
+                <Icon.Button 
+                  name="menu" 
+                  size={25}
+                  color="white" 
+                  style={{ marginLeft: 10, marginBottom: 20, marginTop: 10 }}
+                  backgroundColor="#2CBF91" 
+                  onPress={() => navigation.openDrawer()}>
+                </Icon.Button>
+              
+              <View style={{ flexDirection:'row'}}>
+                <Text style={{ marginLeft: 20, paddingLeft: 13, paddingRight: 13, backgroundColor: 'white', color: '#3DD58E', borderRadius: 5, paddingBottom:3, paddingTop:3}}>Filtres</Text>
+                <Text style={{ marginLeft: 10, paddingLeft: 8, paddingRight: 8, backgroundColor: 'white', color: '#3DD58E', borderRadius: 100, paddingBottom:3, paddingTop:3}}>+</Text>
+              </View>
+            </View>
           )
         }}
       />
@@ -313,28 +338,3 @@ export default function App() {
 
 
 
-// name="TilesShop" 
-// component={TilesShopView} 
-// options={{
-//   headerStyle:{backgroundColor:'#2CBF91',height: 100},
-//   headerTitleAlign: 'center',
-//   headerTitle: () => (
-//     <Image key={1} source={require('./assets/couleur_sur_vert.png')} style={{ width: 200, resizeMode:'contain'}}></Image>
-//   ),
-//   headerLeft: () => (
-//     <View>
-//         <Icon.Button 
-//           name="menu" 
-//           size={25}
-//           color="white" 
-//           backgroundColor="#2CBF91" 
-//           onPress={() => navigation.openDrawer()}>
-//         </Icon.Button>
-      
-//       <View style={{ flexDirection:'row'}}>
-//         <Text style={{ marginLeft: 10, paddingLeft: 13, paddingRight: 13, backgroundColor: 'white', color: '#3DD58E', borderRadius: 5, paddingBottom:3, paddingTop:3}}>Filtres</Text>
-//         <Text style={{ marginLeft: 10, paddingLeft: 8, paddingRight: 8, backgroundColor: 'white', color: '#3DD58E', borderRadius: 100, paddingBottom:3, paddingTop:3}}>+</Text>
-//       </View>
-//     </View>
-//   )
-// }}

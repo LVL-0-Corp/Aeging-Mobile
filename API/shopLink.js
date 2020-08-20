@@ -11,6 +11,49 @@ async function getShops() {
       return [];
     }
 }
+
+// async function getShops3(lat,long) {
+//   try {
+//     let result = await fetch('https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=50.2795249&lon=3.9749732').then((res) => res.json());
+//     console.log(result.address.town);
+//     if(result.address.town != null){
+//       return result.address.town;
+//     }else{
+//       return result.address.village;
+//     }
+    
+//   } catch (e) {
+//     console.error("FAIL BATARD", e);
+//     return [];
+//   }
+// }
+
+async function getShops3(lat,long) {
+  try {
+    // console.log(lat,long, `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${long}`);
+    console.log('bienvenu dans getshops3 avec comme params : ',lat, long,'pour le lien suivant : https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=37.421998333333335&lon=-122.08400000000002');
+    let result = await fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=37.421998333333335&lon=-122.08400000000002`).then((res) => console.log(res)).catch(error => console.log(error.message));
+    //res.json()
+    console.log('Fin de l appel du lien avec resultat : ', result);
+    // console.log("eeeeee")
+    console.log(result);
+    if(result.address.town != null){
+      return result.address.town;
+    }else{
+      if(result.address.city != null){
+        return result.address.city;
+      }
+      else{
+        console.log("last chance")
+        return 'result.address.village';
+      }
+    }
+  } catch (e) {
+    console.error("FAIL BATARD : ", e);
+    return [];
+  }
+}
+
 async function getShops2() {
   return [{
     imagesUrl: [
@@ -35,4 +78,4 @@ async function getShops2() {
   }]
 }
 
-export { getShops };
+export { getShops, getShops3 };

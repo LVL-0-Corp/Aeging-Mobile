@@ -2,44 +2,92 @@ import React, { Fragment, useState, useEffect } from 'react';
 import {
     View,
     SafeAreaView,
+    Text,
     ScrollView,
     StatusBar
 } from "react-native";
 import ShopTile from "../Component/ShopTile";
-import { getShops } from "../../API/shopLink";
+import { getShops, getShops3 } from "../../API/shopLink";
+
+import Geolocation from '@react-native-community/geolocation';
+import Geocoder from 'react-native-geocoding';
+
+// Geolocation.setRNConfiguration(config);
+Geolocation.getCurrentPosition(info => console.log(info));
+
 
 function TilesShopView ({navigation}) {
+    const [lat, setLat]=useState(null);
+    const [long, setLong]=useState(null);
     const [currentShopsList, setCurrentShopsList] = useState([])
+    const [loc, setLoc] = useState([])
+
+
+    const updtGeoLoc = () => {
+        Geolocation.getCurrentPosition((data) => {
+          setLat(data.coords.latitude)
+          setLong(data.coords.longitude)
+        })
+    }
+    // Geolocation.getCurrentPosition(data=>{
+    //     setLat(data.coords.latitude)
+    // });
+    // Geolocation.getCurrentPosition(data=>{
+    //     setLong(data.coords.longitude)
+    // });
+
     /*constructor (props) {
         super(props);
         this.state = { currentShopsList: [] };
     }*/
 
+    const updateLoc = async (newLat, newLong) => {
+        /*this.setState({*/
+        //     currentShopsList: await getShops()
+        // });
+        console.log('Appel de getShops3 avec comme param : ',newLat,newLong);
+        const wait = await getShops3(newLat,newLong);
+        console.log('Sorti de getShops3 avec comme param : ', newLat,newLong,' et comme resultat : ', wait);
+        setLoc(wait);
+    }
     /*async updateShops() {*/
     const updateShops = async () => {
         /*this.setState({*/
         //     currentShopsList: await getShops()
         // });
         const wait = await getShops();
-        setCurrentShopsList(wait);
-        
+        setCurrentShopsList(wait);  
     }
     
     // componentDidMount() {
     //    this.updateShops();
     // }
     useEffect(() => {
-        // this.updateShops();
+        updtGeoLoc();
+        updateLoc(37.421998333333335,-122.08400000000002);
         updateShops();
-        // return () => {
-        //     cleanup
-        // }
-    }, []);
+    }, [])
+
+    // useEffect(() => {
+    //     if(lat && long) {
+    //         console.log("eee", lat, long);
+    //         updateLoc(lat, long);
+    //     }
+    // }, [lat,long]);
+
+    // useEffect(() => {
+    //     // this.updateShops();
+    //     // return () => {
+    //     //     cleanup
+    //     // }
+    // }, []);
+
 
     // render() {       
         // const TABSHOPS = this.state.currentShopsList;        
-        const TABSHOPS = currentShopsList;        
-        let TABTILES = null;
+        const TABSHOPS = currentShopsList; 
+        const loca = loc;      
+        let TABTILES = null;      
         if(TABSHOPS.length > 0){
             TABTILES = TABSHOPS.map((shop)=>{
                 return (
@@ -68,6 +116,9 @@ function TilesShopView ({navigation}) {
                 );
             });
         }
+        // import Geolocation from '@react-native-community/geolocation';
+
+        // Geolocation.getCurrentPosition(info => console.log(info));
         return (
             <Fragment>
                 <StatusBar barStyle="dark-content" />
@@ -84,6 +135,7 @@ function TilesShopView ({navigation}) {
                             justifyContent: 'space-around',
                             backgroundColor: '#fbfff9'
                         }}>
+                            <Text> lat : {lat} long : {long}  {loca}</Text>
                             {TABTILES}
                         </View>
                     </ScrollView>
