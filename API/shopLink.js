@@ -4,7 +4,7 @@
 
 async function getShops() {
     try {
-      let result = await fetch('http://192.168.99.1:3000/api/0.1/shops').then((res) => res.json());
+      let result = await fetch('http://46.101.185.146:3000/api/0.1/shops').then((res) => res.json());
       return result;
     } catch (e) {
       console.error("FAIL BATARD", e);
