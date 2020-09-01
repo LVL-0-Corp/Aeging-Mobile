@@ -26,11 +26,12 @@ function WhoAreWeView({ navigation, route }) {
                             <Image
                                 key={0}
                                 source={require('../../assets/couleur_sur_vert.png')}
-                                style={{ width:380, height:300, resizeMode: 'contain' }}
+                                style={{ width:365, height:300, resizeMode: 'contain' }}
                             />
-                            <View style= {{flex: 1, flexDirection:'row', justifyContent: 'center', width:380}}>
+                            <View style= {{flex: 1, flexDirection:'row', justifyContent: 'center'}}>
                                 <View style={styles.contactIcon}>
                                     <Icon
+                                        onPress={() => Linking.openURL('mailto:localgo.france@gmail.com') }
                                         name="email"
                                         color="#FFFFFF"
                                         size={25}
@@ -38,6 +39,17 @@ function WhoAreWeView({ navigation, route }) {
                                 </View> 
                                 <View style={styles.contactIcon}>
                                     <Icon
+                                        onPress={
+                                            () => {
+                                                let phone = '0750332318';
+                                                if (Platform.OS === 'android') {
+                                                    phone = 'tel:' + phone
+                                                } else {
+                                                    phone = 'telprompt:' + phone
+                                                }
+                                                Linking.openURL(phone);
+                                            }
+                                        }
                                         name="phone"
                                         color="#FFFFFF"
                                         size={25}
@@ -45,6 +57,9 @@ function WhoAreWeView({ navigation, route }) {
                                 </View>
                                 <View style={ styles.contactIconFb}>
                                     <Icon
+                                    onPress={
+                                        Linking.openURL('https://www.facebook.com/LocalGo.france')
+                                    }
                                         name="facebook"
                                         color="#FFFFFF"
                                         size={25}

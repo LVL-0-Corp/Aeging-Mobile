@@ -1,12 +1,12 @@
 import React from 'react';
-import { Dimensions, Text } from 'react-native';
+import { Dimensions, Text, View } from 'react-native';
 import { Tile } from 'react-native-elements';
 import PropTypes from 'prop-types';
 
 const ShopTile = (props) => {
-    const { shopName, shopShortDescription, shopImageUrl, infosRouting } = props;
+    const { shopName, shopShortDescription, shopImageUrl, infosRouting, productType } = props;
     var {height: heightWindow, width: widthWindow} = Dimensions.get('window');
-    let tileWidth = Math.floor((widthWindow-50)/2);
+    let tileWidth = Math.floor((widthWindow-40)/2);
     let tileHeight = Math.floor((heightWindow)/4);
 
     return (
@@ -34,15 +34,9 @@ const ShopTile = (props) => {
                 borderTopLeftRadius: 10,
                 borderTopRightRadius: 10,
             }}
-            imageContainerStyle={{
-                
-            }}
-            title={shopName} 
-            titleStyle={{
-                textAlign: "center",
-            }}
         >
-            <Text>{shopShortDescription}</Text>
+            <Text style={{ color:'#39D3A2', fontSize: 16, marginTop:-45, fontFamily: 'futura-medium-bt', marginBottom: 5, textTransform: 'uppercase', marginLeft: -7, marginRight: -7 }}>{shopName}</Text>
+            <Text style={{ color:'#39D3A2', marginLeft: -7, marginRight: -7, marginBottom: 8 }}>{productType}</Text>
         </Tile>
     );
 }

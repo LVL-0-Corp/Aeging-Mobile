@@ -75,20 +75,20 @@ function ShopView({ navigation, route }) {
                         </ScrollView>
                         <View style={{ margin:15}}>
                             <Text style={{ fontSize: 20, fontFamily: 'futura-medium-bt', color: '#35D19E' }}>{shopName}</Text>
-                            <Text style={{ color: '#37D2A0', textDecorationLine: 'underline' }} onPress={() => Linking.openURL('http://' + shopWebSite)}>{shopWebSite}</Text>
-                            <Text style={{color:'#37D2A0'}}>{shopAddress}</Text>
-                            <View style={{ display: 'flex', flexDirection: 'row' }}
+                            <Text style={{ color: '#37D2A0', marginBottom: 2, textDecorationLine: 'underline' }} onPress={() => Linking.openURL('http://' + shopWebSite)}>{shopWebSite}</Text>
+                            <Text style={{color:'#37D2A0', marginBottom: 20}}>{shopAddress}</Text>
+                            <View style={{ display: 'flex', flexDirection: 'row', marginBottom: 20 }}
                             >
                                 <Icon
                                     name="email"
                                     size={25}
-                                    style={{ paddingRight: 10, paddingLeft: 10, paddingTop: 3, paddingBottom: 3, backgroundColor: 'lightgrey', borderRadius: 8 }}
+                                    style={{ paddingRight: 15, paddingLeft: 15, paddingTop: 15, paddingBottom: 15, backgroundColor: '#37D2A0', borderRadius: 50, color: 'white' }}
                                     onPress={() => Linking.openURL('mailto:' + shopMail)}
                                 />
                                 <Icon
                                     name="phone"
                                     size={25}
-                                    style={{ marginLeft: 10, paddingRight: 10, paddingLeft: 10, paddingTop: 3, paddingBottom: 3, backgroundColor: 'lightgrey', borderRadius: 8 }}
+                                    style={{ marginLeft: 10, paddingRight: 15, paddingLeft: 15, paddingTop: 15, paddingBottom: 15, backgroundColor: '#37D2A0', borderRadius: 50, color: 'white' }}
                                     onPress={
                                         () => {
                                             let phone = '';
@@ -101,10 +101,27 @@ function ShopView({ navigation, route }) {
                                         }
                                     }
                                 />
+                                <Icon
+                                    name="facebook"
+                                    size={25}
+                                    style={{ marginLeft:10, paddingRight: 20, paddingLeft: 20, paddingTop: 15, paddingBottom: 15, backgroundColor: '#37D2A0', borderRadius: 50, color: 'white' }}
+                                    onPress={() => Linking.openURL('mailto:' + shopMail)}
+                                />
                             </View>
-                            <Text>{shopTimeTable}</Text>
-                            <Text>{shopCertif}</Text>
-                            <Text>{shopProductType}</Text>
+                            <Text>
+                                <Text style={{ color:'#37D2A0', fontFamily: "AEH" }}>Horaires : </Text>
+                                <Text style={{ color:'#37D2A0',fontFamily: "AvenirLTStd-Book" }}>{shopTimeTable}</Text>
+                            </Text>
+                            <View style={{ flexDirection: 'row', width: 400, marginTop: 15 }}>
+                                <Text style={{ backgroundColor:'#94FBAF', color:'#3DD58E', paddingLeft: 15, paddingRight: 15, paddingBottom: 5, paddingTop: 5, marginRight: 10, borderRadius: 5 }}>
+                                    {shopCertif}
+                                </Text>
+                            </View>
+                            <View style={{ flexDirection: 'row', width: 400, marginTop: 15, marginBottom: 15 }}>
+                                <Text style={{ backgroundColor:'#D3FFEE', color:'#3DD58E', paddingLeft: 15, paddingRight: 15, paddingBottom: 5, paddingTop: 5, marginRight: 10, borderRadius: 5 }}>
+                                    {shopProductType}
+                                </Text>
+                            </View>
                             <Text>{shopLongDescription}</Text>
                             <View style={{
                                     flex: 1,

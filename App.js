@@ -30,6 +30,9 @@ import NewsView from './UI/View/NewsView';
 import WhoAreWeView from './UI/View/WhoAreWeView';
 import CertificationView from './UI/View/CetificationView';
 import OnBoarding from './UI/View/OnBoarding';
+import FilterView from './UI/Component/FilterView';
+import { color } from 'react-native-reanimated';
+
 
 const OnBoardingStack = createStackNavigator();
 // const HomeStack = createStackNavigator();
@@ -43,9 +46,6 @@ const NewsStack = createStackNavigator();
 const WhoAreWeStack = createStackNavigator();
 // const Tab = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
-
-
-import Geolocation from '@react-native-community/geolocation';
 
 // Geolocation.setRNConfiguration(config);
 navigator.geolocation = require('@react-native-community/geolocation');
@@ -89,9 +89,9 @@ function TileStackScreen({navigation},props) {
               <TextInput
                 placeholder="Rechercher"
                 placeholderTextColor="white"
-                style={{borderRadius: 5, borderColor: "white", borderWidth: 1, marginTop: -40, width: 200, paddingLeft: 45}}
+                style={{borderRadius: 5, borderColor: "white", borderWidth: 1, marginTop: -40, width: 200, paddingLeft: 45, color:'white' }}
                 autoCapitalize="none"
-                onChangeText={(value) => textInputChange(value)}
+                onChangeText={(value) => console.log(value)}
               />
             </View>
           ),
@@ -108,7 +108,7 @@ function TileStackScreen({navigation},props) {
               
               <View style={{ flexDirection:'row'}}>
                 <Text style={{ marginLeft: 20, paddingLeft: 13, paddingRight: 13, backgroundColor: 'white', color: '#3DD58E', borderRadius: 5, paddingBottom:3, paddingTop:3}}>Filtres</Text>
-                <Text style={{ marginLeft: 10, paddingLeft: 8, paddingRight: 8, backgroundColor: 'white', color: '#3DD58E', borderRadius: 100, paddingBottom:3, paddingTop:3}}>+</Text>
+                <Text style={{ marginLeft: 10, paddingLeft: 8, paddingRight: 8, backgroundColor: 'white', color: '#3DD58E', borderRadius: 100, paddingBottom:3, paddingTop:3}} onPress={() => navigation.navigate('Filter')}>+</Text>
               </View>
             </View>
           )
@@ -120,8 +120,25 @@ function TileStackScreen({navigation},props) {
         options={{ 
           headerTransparent: true, 
           headerTitle: false, 
-          headerRight: () => (<Text>lalaal</Text>)
-        }}/>
+          headerRight: () => (<Text></Text>)
+      }}/>
+      <TileStack.Screen
+        name="Filter"
+        component={FilterView}
+        options={{
+          title: 'Filtres',
+          headerStyle: {backgroundColor:"#F4FFF9"},
+          headerTitleStyle: {color:'#35D19E', fontFamily:'futura-medium-bt', textAlign:'center'},
+          headerRight: () => (<Icon name='check' color='#35D19E' size={25} style={{marginRight: 20, backgroundColor:"#F4FFF9"}}></Icon>),
+        //   headerLeft: ()=>(
+        //     <Icon 
+        //       name="arrow-left"
+        //       onPress={() => navigation.pop()}
+        //       size={25} 
+        //       color="#35D19E"/>
+        //  )
+        }}
+      />
     </TileStack.Navigator>
   )
 }
@@ -218,8 +235,8 @@ function NewsStackScreen({navigation},props) {
       <NewsStack.Screen name="News" component={NewsView} 
         options={{
           headerTitleAlign: 'center',
-          headerTransparent:true,
           title:'Actualités',
+          headerStyle:{backgroundColor:'#F4FFF9'},
           headerTitleStyle:{color:'#35D19E', fontFamily:'futura-medium-bt'},
           headerLeft: () => (
             <Icon.Button name="menu" size={25}

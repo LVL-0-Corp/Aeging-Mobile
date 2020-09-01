@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import {
     Text,
     SafeAreaView,
@@ -9,9 +9,40 @@ import {
     Linking
 } from "react-native";
 import { View } from 'native-base';
+import CertificationTile from "../Component/CertificationTile";
+import { getCertif } from "../../API/certifLink";
+
 
 function CertificationView({ navigation, route }) {
     const { height } = Dimensions.get("window");
+    const [currentCertifList, setCurrentCertifList] = useState([])
+
+    const updateCertif = async () => {
+        const wait = await getCertif();
+        setCurrentCertifList(wait);  
+    }
+
+    useEffect(() => {
+        updateCertif();
+    }, [])
+
+    const TABCERTIF = currentCertifList;
+    let TABTILES = null;
+    if(TABCERTIF.length > 0){
+        TABTILES = TABCERTIF.map((certif)=>{
+            return (
+                <CertificationTile
+                    key={certif._id}
+                    titleCertif={certif.titleCertif}
+                    imageCertif={certif.imageCertif}
+                    describeCertif={certif.describeCertif}
+                    urlCertif={certif.urlCertif}
+                />
+            );
+        })
+
+    }
+
     return (
         <Fragment>
             <StatusBar barStyle="dark-content" />
@@ -20,36 +51,8 @@ function CertificationView({ navigation, route }) {
                     showsVerticalScrollIndicator={false}
                     automaticallyAdjustContentInsets={true}
                 >
-                    <View 
-                    style= {{ flex: 1, flexDirection: 'column', justifyContent: 'space-between', alignItems: 'center', backgroundColor:'#F4FFF9'}}>
-                        <View style={{
-                                flex: 1,
-                                flexDirection: 'row',
-                                flexWrap: 'nowrap',
-                                justifyContent: 'center',
-                                alignItems: 'flex-start',
-                                marginTop: 15,
-                            }}>
-                            <Image source={require('../../assets/ce.jpg')}  style={{ flex: 2 }}/>
-                            <Text style={{ width: 250, marginLeft: 15, flex: 3 }}>
-                                Le label bio de l'Union européenne est un label de qualité certifiant qu'un produit commercialisé est conforme au règlement de <Text style={{ color: 'blue'}} onPress={ ()=> Linking.openURL('https://fr.wikipedia.org/wiki/Union_europ%C3%A9enne') }>l'Union européenne</Text> sur <Text style={{ color: 'blue'}} onPress={ ()=> Linking.openURL('https://fr.wikipedia.org/wiki/Agriculture_biologique') }>l'agriculture biologique</Text>
-                            </Text>
-                        </View>
-                        <View style={{
-                                flex: 1,
-                                flexDirection: 'row',
-                                flexWrap: 'nowrap',
-                                justifyContent: 'center',
-                                alignItems: 'flex-start',
-                                marginTop: 15,
-                            }}>
-                            <View style={{ flex: 2, alignItems: 'center'}}>
-                                <Image source={require('../../assets/abf.jpg')}  style={{ width: 80, height: 100 }}/>
-                            </View>
-                            <Text style={{ width: 250, marginLeft: 15, flex: 3 }}>
-                                Le label bio de l'Union européenne est un label de qualité certifiant qu'un produit commercialisé est conforme au règlement de l'Union européenne sur l'agriculture biologique
-                            </Text>
-                        </View>
+                    <View style={{paddingLeft: 20, paddingRight: 20, backgroundColor: '#F4FFF9', paddingTop: 20, paddingBottom: 40}}>
+                        {TABTILES}
                     </View>
                 </ScrollView>
             </SafeAreaView>

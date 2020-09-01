@@ -21,7 +21,6 @@ function DrawerContent(props){
         
         <View style={styles.backgroundDrawer}>
             <DrawerContentScrollView {...props}>
-                <View style={styles.drawerContent}>
                     <View style={styles.userInfoSection}>
                         <Image
                             key={0}
@@ -61,10 +60,10 @@ function DrawerContent(props){
 
                     </View>
 
-                    <Drawer.Section style={styles.drawerSection, {alignItems:'center'}}>
+                    <Drawer.Section style={styles.drawerSection}>
                         <DrawerItem
                             label="ACCUEIL"
-                            labelStyle={{color:'white', textAlign:'center', fontFamily:'futura-medium-bt'}}
+                            labelStyle={{color:'white', fontFamily:'futura-medium-bt'}}
                             onPress={() => {props.navigation.navigate('ACCUEIL')}}
                         />
                         <DrawerItem
@@ -74,7 +73,7 @@ function DrawerContent(props){
                         />
                         <DrawerItem
                             label="ACTUALITÉS"
-                            labelStyle={{color:'white', fontFamily:'futura-medium-bt'}}
+                            labelStyle={{color:'white',  fontFamily:'futura-medium-bt'}}
                             onPress={() => {props.navigation.navigate('ACTUALITÉS')}}
                         />
                         <DrawerItem
@@ -93,7 +92,6 @@ function DrawerContent(props){
                             onPress={() => {props.navigation.navigate('Certification')}}
                         />
                     </Drawer.Section>
-                </View>
             </DrawerContentScrollView>
             <Drawer.Section style={StyleSheet.bottomDrawerSection}>
                 <DrawerItem
@@ -117,12 +115,6 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#39D3A2',
         alignItems:'center',
-    },
-    drawerContent: {
-        flex: 1,
-        alignItems: 'center',
-        flexDirection:'column',
-        flexWrap:'nowrap',
     },
     userInfoSection: {
         flex:1,
@@ -149,7 +141,7 @@ const styles = StyleSheet.create({
     },
     drawerSection: {
         marginTop: 15,
-        flex:1,
+        alignItems:'center',
     },
     bottomDrawerSection: {
         marginBottom: 15,

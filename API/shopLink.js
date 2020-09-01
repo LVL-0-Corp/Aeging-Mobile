@@ -12,6 +12,16 @@ async function getShops() {
     }
 }
 
+async function getShopsByLoc(lat,long) {
+  try {
+    let result = await fetch('http://192.168.99.1:3000/api/0.1/shops').then((res) => res.json());
+    return result;
+  } catch (e) {
+    console.error("FAIL BATARD", e);
+    return [];
+  }
+}
+
 // async function getShops3(lat,long) {
 //   try {
 //     let result = await fetch('https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=50.2795249&lon=3.9749732').then((res) => res.json());
@@ -31,8 +41,8 @@ async function getShops() {
 async function getShops3(lat,long) {
   try {
     // console.log(lat,long, `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${long}`);
-    console.log('bienvenu dans getshops3 avec comme params : ',lat, long,'pour le lien suivant : https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=37.421998333333335&lon=-122.08400000000002');
-    let result = await fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=37.421998333333335&lon=-122.08400000000002`).then((res) => console.log(res)).catch(error => console.log(error.message));
+    console.log('bienvenu dans getshops3 avec comme params : ',lat, long,'pour le lien suivant : https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat='+lat+'&lon=-122.08400000000002');
+    let result = await fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${long}`).then((res) => res.json());
     //res.json()
     console.log('Fin de l appel du lien avec resultat : ', result);
     // console.log("eeeeee")
@@ -45,7 +55,7 @@ async function getShops3(lat,long) {
       }
       else{
         console.log("last chance")
-        return 'result.address.village';
+        return result.address.village;
       }
     }
   } catch (e) {
